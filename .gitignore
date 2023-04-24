@@ -1,0 +1,7 @@
+.*/
+out/
+__pycache__/
+*~
+*.h5
+*.npy
+*.npz
