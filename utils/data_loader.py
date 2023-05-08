@@ -6,6 +6,7 @@ class DataLoader:
 		f = h5py.File(filename, 'r')
 		self.f           = f # keep it open
 		self.scans       = f['scans'] # lazy load
+		self.timestamps  = f['timestamps'][:]
 		self.circle_idxs = f['circle_idx'][:]
 		self.circle_nums = f['circle_num'][:]
 		self.circles     = f['circles'] # lazy load
