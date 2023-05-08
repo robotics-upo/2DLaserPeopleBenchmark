@@ -3,5 +3,10 @@ out/
 __pycache__/
 *~
 *.h5
+*.xz
 *.npy
 *.npz
+*.old
+*.png
+*.jpg
+*.mp4
