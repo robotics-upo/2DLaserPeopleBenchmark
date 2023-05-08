@@ -14,14 +14,14 @@ MODELS = {
 	'LFE-Peaks':     'LFE_mixed_global_20230421145111',
 	'LFE-PPN':       'LFE_PPN_global_all3_sep_20230427145355',
 	'DROW3':         'drow_on_frog',
-	'DR-SPAAM':      'dr_spaam_on_frog',
+	'DR-SPAAM (T=1)': 'dr_spaam_on_frog',
+	'DR-SPAAM (T=5)': 'dr_spaam_5_on_frog',
 }
 
 fig, ax = plt.subplots(figsize=(6.0, 6.0))
 
 ax.plot([0,1],[0,1], color='gray', linewidth=0.5, linestyle='dashed')
-#ax.set_prop_cycle(color=['red', 'green', 'blue'])
-cm = plt.get_cmap('Dark2') # Set1 looks good with 5 models
+cm = plt.get_cmap('rainbow')
 ax.set_prop_cycle(color=cm(np.linspace(0, 1, len(MODELS))))
 
 def proper_ap(recs, precs, points=11):
@@ -57,15 +57,17 @@ for name,prfile in MODELS.items():
 		Th_values = f['T']
 
 	F1_values = 2 * Pr_values * Rc_values / np.clip(Pr_values + Rc_values, 1e-16, 2+1e-16)
-	AP = None #proper_ap(Rc_values, Pr_values)
-	peakF1 = np.max(F1_values)
+	AP = proper_ap(Rc_values, Pr_values)
+	i_peakF1 = np.argmax(F1_values)
+	peakF1 = F1_values[i_peakF1]
+	peakF1_th = Th_values[i_peakF1]
 	EER = eer(Rc_values, Pr_values)
 
 	print(f'---- {name} ----')
-	AP = proper_ap(Rc_values, Pr_values)
 	print(f'AP:      {AP    *100.0:.1f}')
 	print(f'Peak F1: {peakF1*100.0:.1f}')
 	print(f'EER:     {EER   *100.0:.1f}')
+	print(f'Thresh:  {peakF1_th:.6f}')
 
 	ax.plot(Rc_values, Pr_values, label=name, linewidth=1.25, linestyle='dashed')
 
@@ -80,8 +82,8 @@ ax.set_xlim(xmin=0.0-SMALL_OFFSET, xmax=1.0+SMALL_OFFSET)
 ax.set_xticks(ticks)
 ax.set_ylim(ymin=0.0-SMALL_OFFSET, ymax=1.0+SMALL_OFFSET)
 ax.set_yticks(ticks)
-ax.set_facecolor('whitesmoke')
-ax.grid()
+ax.set_facecolor((0.7,0.7,0.7))
+ax.grid(color=(0.9,0.9,0.9))
 ax.legend(loc='lower left')
 
 fig.tight_layout(pad=.0)
