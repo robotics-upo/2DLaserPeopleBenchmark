@@ -70,4 +70,4 @@ class DataLoader:
 
 	def __getitem__(self, i):
 		i = self.selection[i]
-		return (self.scans[i,:], self.circles[self.circle_idxs[i]:self.circle_idxs[i]+self.circle_nums[i]])
+		return (np.nan_to_num(self.scans[i,:], posinf=100.0), self.circles[self.circle_idxs[i]:self.circle_idxs[i]+self.circle_nums[i]])

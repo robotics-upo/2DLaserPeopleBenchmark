@@ -9,12 +9,12 @@ np.tau = math.tau
 ASSOC_DISTANCE = 0.5 #0.3
 
 MODELS = {
-	'PeTra':         'petra_frog',
-	'PeTra*':        'petra_frog_mixedloss',
-	'LFE-Peaks':     'LFE_mixed_global_20230421145111',
-	'LFE-PPN':       'LFE_PPN_global_all3_sep_20230427145355',
-	'DROW3':         'drow_on_frog',
-	'DR-SPAAM (T=1)': 'dr_spaam_on_frog',
+	'PeTra':          'petra_frog',
+	'PeTra*':         'petra_frog_mixedloss',
+	'LFE-Peaks':      'LFE_seg_20230421145111',
+	'LFE-PPN':        'LFE_PPN_20230427145355',
+	'DROW3':          'drow_on_frog',
+	'DR-SPAAM (T=1)': 'dr_spaam_1_on_frog',
 	'DR-SPAAM (T=5)': 'dr_spaam_5_on_frog',
 }
 
@@ -51,7 +51,7 @@ def eer(recs, precs):
 
 # Load PR curves and calculate metrics
 for name,prfile in MODELS.items():
-	with np.load(f'eval/{prfile}_test_out_pr_{ASSOC_DISTANCE}.npz') as f:
+	with np.load(f'test/{prfile}_pr_{ASSOC_DISTANCE}.npz') as f:
 		Pr_values = f['P']
 		Rc_values = f['R']
 		Th_values = f['T']

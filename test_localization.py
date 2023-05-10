@@ -7,8 +7,8 @@ from utils.models import extract_loc_out
 from utils.localization import parse_loc
 from utils.testing import batch_and_infer
 
-DATASET_FILE = 'frog_test.h5'
-MODEL_FILE = 'LFE_PPN_global_20230421163015.h5'
+DATASET_FILE = 'frog_16-41_test.h5'
+MODEL_FILE = 'LFE_PPN_20230427145355.h5'
 
 mdl = tf.keras.models.load_model(MODEL_FILE, compile=False)
 
@@ -39,7 +39,7 @@ all_people_idx = np.array(all_people_idx, dtype=np.uint32)
 all_people_num = np.array(all_people_num, dtype=np.uint32)
 
 print("Saving results...")
-np.savez_compressed(MODEL_FILE.replace('.h5', '_test_out.npz'),
+np.savez_compressed('test/'+MODEL_FILE.replace('.h5', '.npz'),
 	people=all_people,
 	idxs=all_people_idx,
 	nums=all_people_num)

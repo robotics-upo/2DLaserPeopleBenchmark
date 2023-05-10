@@ -4,8 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
+#DIR_NAME = 'drow_on_frog'
+#DIR_NAME = 'dr_spaam_1_on_frog'
 DIR_NAME = 'dr_spaam_5_on_frog'
-NUM_SCANS = 50090
+NUM_SCANS = 50088
 
 SCORE_THRESHOLD = 0.01
 SCAN_FAR = 10.0
@@ -17,7 +19,7 @@ all_people_num = []
 total_people_added = 0
 
 for i in tqdm(range(NUM_SCANS)):
-	with open(f'{DIR_NAME}/{i:06d}.txt', 'r', encoding='utf-8') as f:
+	with open(f'test/{DIR_NAME}/{i:06d}.txt', 'r', encoding='utf-8') as f:
 		lines = f.readlines()
 
 	cur_people = []
@@ -49,7 +51,7 @@ all_people_idx = np.array(all_people_idx, dtype=np.uint32)
 all_people_num = np.array(all_people_num, dtype=np.uint32)
 
 print("Saving results...")
-np.savez_compressed(f'eval/{DIR_NAME}_test_out.npz',
+np.savez_compressed(f'test/{DIR_NAME}.npz',
 	people=all_people,
 	idxs=all_people_idx,
 	nums=all_people_num)

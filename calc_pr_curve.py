@@ -5,8 +5,15 @@ from tqdm import tqdm
 from sklearn.metrics import auc
 np.tau = math.tau
 
-DATASET_FILE = 'frog_test.h5'
-RESULTS_FILE = 'LFE_PPN_global_all3_sep_20230427145355_test_out.npz'
+DATASET_FILE = 'frog_16-41_test.h5'
+
+#RESULTS_FILE = 'petra_frog.npz'
+#RESULTS_FILE = 'petra_frog_mixedloss.npz'
+#RESULTS_FILE = 'LFE_seg_20230421145111.npz'
+#RESULTS_FILE = 'LFE_PPN_20230427145355.npz'
+#RESULTS_FILE = 'drow_on_frog.npz'
+#RESULTS_FILE = 'dr_spaam_1_on_frog.npz'
+RESULTS_FILE = 'dr_spaam_5_on_frog.npz'
 
 ASSOC_DISTANCE = 0.5 #0.3
 
@@ -15,7 +22,7 @@ with h5py.File(DATASET_FILE, 'r') as f:
 	gt_people_idxs = f['circle_idx'][:]
 	gt_people_nums = f['circle_num'][:]
 
-with np.load(RESULTS_FILE) as f:
+with np.load('test/'+RESULTS_FILE) as f:
 	det_people = f['people']
 	det_people = det_people.reshape((-1,3)).astype(np.float32)
 	det_people_idxs = f['idxs']
@@ -90,7 +97,7 @@ Rc_values = np.array(Rc_values, dtype=np.float32)
 Th_values = det_people[np.array(Th_values,dtype=np.uint32),0]
 
 print("Saving results...")
-np.savez_compressed(RESULTS_FILE.replace('.npz', f'_pr_{ASSOC_DISTANCE}.npz'),
+np.savez_compressed('test/'+RESULTS_FILE.replace('.npz', f'_pr_{ASSOC_DISTANCE}.npz'),
 	R=Rc_values,
 	P=Pr_values,
 	T=Th_values,

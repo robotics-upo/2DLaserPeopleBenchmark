@@ -4,9 +4,9 @@ from utils.segmentation import SegDataGenerator
 from utils.models import build_seg_model, dice_loss, mixed_loss, logistic_adapter
 from utils.training import pretty_train
 
-DATASET_FILE = 'frog_train+val.h5'
+DATASET_FILE = 'frog_11-36_12-43_train_val.h5'
 
-MODEL_NAME = 'LFE_mixed_global'
+MODEL_NAME = 'LFE_seg'
 NUM_EPOCHS = 100
 BATCH_SIZE = 32
 

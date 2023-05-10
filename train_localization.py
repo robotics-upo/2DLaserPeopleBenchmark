@@ -4,10 +4,10 @@ from utils.localization import LocDataGenerator
 from utils.models import build_loc_model, loc_model_loss
 from utils.training import pretty_train
 
-DATASET_FILE = 'frog_train+val.h5'
+DATASET_FILE = 'frog_11-36_12-43_train_val.h5'
 
-MODEL_NAME = 'LFE_PPN_global'
-BACKBONE_MODEL = 'LFE_mixed_global_20230421145111.h5'
+MODEL_NAME = 'LFE_PPN'
+BACKBONE_MODEL = 'LFE_seg_20230421145111.h5'
 NUM_EPOCHS = 100
 BATCH_SIZE = 4
 

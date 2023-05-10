@@ -6,7 +6,9 @@ __pycache__/
 *.xz
 *.npy
 *.npz
+*.pth
 *.old
 *.png
 *.jpg
 *.mp4
+
