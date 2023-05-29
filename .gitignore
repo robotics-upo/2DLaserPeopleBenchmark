@@ -1,5 +1,7 @@
 .*/
 out/
+test/
+qualit/
 __pycache__/
 *~
 *.h5
@@ -11,4 +13,4 @@ __pycache__/
 *.png
 *.jpg
 *.mp4
-
+*.onnx
