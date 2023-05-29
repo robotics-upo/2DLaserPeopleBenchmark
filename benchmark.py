@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from sklearn.metrics import auc
+from itertools import cycle
 np.tau = math.tau
 
 ASSOC_DISTANCE = 0.5 #0.3
@@ -18,10 +19,12 @@ MODELS = {
 	'DR-SPAAM (T=5)': 'dr_spaam_5_on_frog',
 }
 
+linecycler = cycle(['dotted', 'dashed', 'dashdot'])
+
 fig, ax = plt.subplots(figsize=(6.0, 6.0))
 
-ax.plot([0,1],[0,1], color='gray', linewidth=0.5, linestyle='dashed')
-cm = plt.get_cmap('rainbow')
+ax.plot([0,1],[0,1], color=(0.8,0.8,0.8), linewidth=0.5, linestyle='dashed')
+cm = plt.get_cmap('Set1')
 ax.set_prop_cycle(color=cm(np.linspace(0, 1, len(MODELS))))
 
 def proper_ap(recs, precs, points=11):
@@ -34,8 +37,6 @@ def proper_ap(recs, precs, points=11):
 		else:
 			new_p.append(0.0)
 	new_p = np.array(new_p, dtype=np.float32)
-	#print('Recalls:   ',new_r)
-	#print('Precisions:',new_p)
 	return np.mean(new_p)
 
 def eer(recs, precs):
@@ -69,7 +70,7 @@ for name,prfile in MODELS.items():
 	print(f'EER:     {EER   *100.0:.1f}')
 	print(f'Thresh:  {peakF1_th:.6f}')
 
-	ax.plot(Rc_values, Pr_values, label=name, linewidth=1.25, linestyle='dashed')
+	ax.plot(Rc_values, Pr_values, label=name, linewidth=1.5, linestyle=next(linecycler))
 
 SMALL_OFFSET=0.01
 ticks = np.linspace(start=0.0, stop=1.0, endpoint=True, num=11)
@@ -82,8 +83,8 @@ ax.set_xlim(xmin=0.0-SMALL_OFFSET, xmax=1.0+SMALL_OFFSET)
 ax.set_xticks(ticks)
 ax.set_ylim(ymin=0.0-SMALL_OFFSET, ymax=1.0+SMALL_OFFSET)
 ax.set_yticks(ticks)
-ax.set_facecolor((0.7,0.7,0.7))
-ax.grid(color=(0.9,0.9,0.9))
+ax.set_facecolor((0.95,0.95,0.95))
+ax.grid(color=(0.8,0.8,0.8))
 ax.legend(loc='lower left')
 
 fig.tight_layout(pad=.0)
