@@ -72,3 +72,13 @@ Each provided script starts with a series of Python variable assignments which c
 	tbd = "TBD"
 }
 ```
+
+## Acknowledgements
+
+![](logos/junta-and.png) ![](logos/minci.png)
+
+This work is partially funded by the Programa Operativo FEDER Andalucía 2014-2020,
+Consejería de Economía, Conocimiento y Universidades (DeepBot, PY20_00817) and by
+the projects NHoA PLEC2021-007868 and NORDIC TED2021-132476B-I00,
+funded by MCIN/AEI/10.13039/501100011033 and the European Union
+"NextGenerationEU"/"PRTR".
