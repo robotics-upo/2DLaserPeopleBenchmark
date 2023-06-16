@@ -1,6 +1,6 @@
 # 2D Laser People Benchmark - FROG Dataset
 
-[[Preprint (arXiv)]](http://whatever.org) [[Dataset]](https://robotics.upo.es/datasets/frog/laser2d_people/)
+[[Preprint (arXiv)]](http://arxiv.org/abs/2306.08531) [[Dataset]](https://robotics.upo.es/datasets/frog/laser2d_people/) [[`laserscan_labeler` tool]](https://github.com/robotics-upo/laserscan_labeler)
 
 ## Requirements
 
@@ -68,8 +68,11 @@ Each provided script starts with a series of Python variable assignments which c
 ## Reference
 
 ```
-@article{frog2023,
-	tbd = "TBD"
+@misc{frog2023,
+	author = {Fernando Amodeo and Noé Pérez-Higueras and Luis Merino and Fernando Caballero},
+	title = {FROG: A new people detection dataset for knee-high 2D range finders},
+	year = {2023},
+	eprint = {arXiv:2306.08531},
 }
 ```
 
