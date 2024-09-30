@@ -175,11 +175,17 @@ def build_loc_model(name=None, backbone=None, num_anchors_per_sector=6, glob=Fal
 	# Feature extractor (backbone)
 	if backbone is None:
 		backbone = build_backbone('backbone', glob=glob)
-	y, _, _ = backbone(y)
+	y_6, y_2, y_1 = backbone(y)
+
+	y = tf.keras.layers.Concatenate()([
+		y_6,
+		tf.keras.layers.MaxPool1D(pool_size=3)(y_2),
+		tf.keras.layers.MaxPool1D(pool_size=6)(y_1),
+	])
 
 	# Localization head
 	if glob: y = my_global_aggregator_block(y)
-	y = tf.keras.layers.Conv1D(filters=512, kernel_size=3, padding='same', activation='relu')(y)
+	y = tf.keras.layers.SeparableConv1D(filters=512, kernel_size=3, padding='same', activation='relu')(y)
 	y = tf.keras.layers.Conv1D(filters=3*num_anchors_per_sector, kernel_size=1, activation=None)(y)
 	y = tf.keras.layers.Reshape((-1, num_anchors_per_sector, 3))(y)
 

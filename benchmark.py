@@ -10,6 +10,7 @@ np.tau = math.tau
 ASSOC_DISTANCE = 0.5 #0.3
 
 MODELS = {
+	'ROS leg_detector': 'ros_leg_detector',
 	'PeTra':          'petra_frog',
 	'PeTra*':         'petra_frog_mixedloss',
 	'LFE-Peaks':      'LFE_seg_20230421145111',
@@ -24,7 +25,7 @@ linecycler = cycle(['dotted', 'dashed', 'dashdot'])
 fig, ax = plt.subplots(figsize=(6.0, 6.0))
 
 ax.plot([0,1],[0,1], color=(0.8,0.8,0.8), linewidth=0.5, linestyle='dashed')
-cm = plt.get_cmap('Set1')
+cm = plt.get_cmap('Dark2')
 ax.set_prop_cycle(color=cm(np.linspace(0, 1, len(MODELS))))
 
 def proper_ap(recs, precs, points=11):

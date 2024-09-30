@@ -22,7 +22,7 @@ backbone = None
 if BACKBONE_MODEL:
 	backbone = tf.keras.models.load_model(BACKBONE_MODEL, compile=False).get_layer('backbone')
 
-mdl = build_loc_model(name=MODEL_NAME, backbone=None, num_anchors_per_sector=loader.NUM_ANCHORS_PER_SECTOR, glob=True)
+mdl = build_loc_model(name=MODEL_NAME, backbone=backbone, num_anchors_per_sector=loader.NUM_ANCHORS_PER_SECTOR, glob=True)
 mdl.summary()
 
 # Compile model
