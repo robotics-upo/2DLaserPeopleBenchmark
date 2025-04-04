@@ -52,7 +52,7 @@ def merge_bags(bags, **kwargs):
 	counter = 0
 	for i in range(1, len(bags)):
 		counter += len(bags[i-1][2]) # add number of circles of previous bag
-		bags[i][3][i] += counter     # add offset to circle indices of current bag
+		bags[i][3] += counter     # add offset to circle indices of current bag
 
 	return tuple(np.concatenate([ x[i] for x in bags ], axis=0) for i in range(len(bags[0])))
 
